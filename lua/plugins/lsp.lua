@@ -18,10 +18,9 @@ return {
         automatic_installation = true,
       })
 
-      local lspconfig = require("lspconfig")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      lspconfig.lua_ls.setup({
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         settings = {
           Lua = {
@@ -32,7 +31,7 @@ return {
         },
       })
 
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.config("rust_analyzer", {
         capabilities = capabilities,
         settings = {
           ["rust-analyzer"] = {
@@ -42,6 +41,8 @@ return {
           },
         },
       })
+
+      vim.lsp.enable({ "lua_ls", "rust_analyzer" })
 
       -- LSP keymaps on attach
       vim.api.nvim_create_autocmd("LspAttach", {
